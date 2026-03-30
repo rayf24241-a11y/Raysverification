@@ -8,9 +8,7 @@ module.exports = async (req, res) => {
     if (!supabaseUrl || !supabaseKey) {
       return res.status(500).json({
         success: false,
-        message: "Missing Supabase env vars",
-        hasUrl: !!supabaseUrl,
-        hasKey: !!supabaseKey
+        message: "Missing Supabase env vars"
       });
     }
 
@@ -24,8 +22,9 @@ module.exports = async (req, res) => {
     }
 
     const { code } = req.body || {};
+    const cleanCode = String(code || "").trim().toUpperCase();
 
-    if (!code) {
+    if (!cleanCode) {
       return res.status(400).json({
         success: false,
         message: "No code provided"
@@ -35,8 +34,8 @@ module.exports = async (req, res) => {
     const { data, error } = await supabase
       .from("verify_codes")
       .select("id, code, used")
-      .eq("code", code)
-      .single();
+      .eq("code", cleanCode)
+      .maybeSingle();
 
     if (error) {
       return res.status(500).json({
