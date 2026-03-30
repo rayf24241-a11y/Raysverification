@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Code</title>
+  <title>Loading Hack Code</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,38 +15,21 @@
   </div>
 
   <main class="page">
-    <section class="card">
-      <div class="top-row">
-        <div class="badge">Code Portal</div>
-        <div class="status-dot"></div>
+    <section class="card loading-card">
+      <div class="loading-spinner"></div>
+      <h1 class="loading-title">Loading Hack Code</h1>
+      <p class="subtext loading-subtext">Please wait while we prepare your code.</p>
+
+      <div class="loading-bar">
+        <div class="loading-bar-fill"></div>
       </div>
-
-      <h1>New Code?</h1>
-      <p class="subtext">Paste the code you got from the bot.</p>
-
-      <div class="input-area">
-        <label for="codeInput" class="input-label">Bot Code</label>
-        <div class="input-shell">
-          <input
-            id="codeInput"
-            type="text"
-            placeholder="Paste your code here"
-            maxlength="40"
-            autocomplete="off"
-            spellcheck="false"
-          />
-        </div>
-      </div>
-
-      <button id="verifyBtn" class="main-btn" onclick="verifyCode()">
-        <span class="btn-text">Continue</span>
-        <span class="btn-glow"></span>
-      </button>
-
-      <div id="result" class="result"></div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    setTimeout(() => {
+      window.location.href = "game-code.html";
+    }, 5000);
+  </script>
 </body>
 </html>

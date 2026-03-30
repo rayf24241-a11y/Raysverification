@@ -31,6 +31,7 @@ async function verifyCode() {
     if (!data.success) {
       result.textContent = data.message || "Invalid code.";
       result.classList.add("error");
+      verifyBtn.disabled = false;
       return;
     }
 
@@ -47,6 +48,7 @@ async function verifyCode() {
     if (!linkData.success || !linkData.code) {
       result.textContent = "Verified, but failed to make your next code.";
       result.classList.add("error");
+      verifyBtn.disabled = false;
       return;
     }
 
