@@ -30,29 +30,15 @@ async function verifyCode() {
     const data = await response.json();
 
     if (!data.success) {
-      result.textContent = data.message || "That bot code is invalid.";
+      result.textContent = data.message || "That code is invalid.";
       result.classList.add("error");
       return;
     }
 
-    const linkResponse = await fetch("/api/create-link-code", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    const customCode = makeCustomAccessCode();
+    localStorage.setItem("customAccessCode", customCode);
 
-    const linkData = await linkResponse.json();
-
-    if (!linkData.success || !linkData.code) {
-      result.textContent = "Bot code worked, but website code could not be created.";
-      result.classList.add("error");
-      return;
-    }
-
-    localStorage.setItem("generatedGameCode", linkData.code);
-
-    result.textContent = "Bot code verified successfully.";
+    result.textContent = "Code accepted.";
     result.classList.add("success");
 
     setTimeout(() => {
@@ -60,84 +46,40 @@ async function verifyCode() {
     }, 700);
   } catch (err) {
     console.error(err);
-    result.textContent = "Error checking bot code.";
+    result.textContent = "Error checking code.";
     result.classList.add("error");
   } finally {
     verifyBtn.disabled = false;
   }
 }
 
-async function copyCode() {
-  const gameCodeOutput = document.getElementById("gameCodeOutput");
-  const copyMsg = document.getElementById("copyMsg");
-
-  if (!gameCodeOutput || !copyMsg) return;
-
-  try {
-    await navigator.clipboard.writeText(gameCodeOutput.value);
-    copyMsg.textContent = "Copied. Now paste it into /linkverify in Discord.";
-  } catch (error) {
-    copyMsg.textContent = "Could not copy.";
-  }
-}
-
-function submitNextBotCode() {
-  const input = document.getElementById("nextBotCodeInput");
-  const result = document.getElementById("finalResult");
-  const box = document.getElementById("finalThingBox");
-  const text = document.getElementById("finalThingText");
-  const codeBox = document.getElementById("finalThingCode");
-
-  if (!input || !result || !box || !text || !codeBox) return;
-
-  const nextCode = input.value.trim().toUpperCase();
-
-  result.textContent = "";
-  result.className = "result";
-  box.classList.add("hidden");
-
-  if (!nextCode) {
-    result.textContent = "Paste the next bot code first.";
-    result.classList.add("error");
-    return;
-  }
-
-  // For now this accepts any non-empty code.
-  // Later you can connect this to Supabase or another API.
-  result.textContent = "Codes correct";
-  result.classList.add("success");
-
-  text.textContent = "Codes correct. Discord user linked. Your actual thing is ready.";
-  codeBox.textContent = "REAL-" + makeFinalThingCode();
-
-  box.classList.remove("hidden");
-}
-
-function makeFinalThingCode() {
+function makeCustomAccessCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let result = "";
+  let result = "SP-";
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 12; i++) {
     result += chars[Math.floor(Math.random() * chars.length)];
   }
 
   return result;
 }
 
-function goToHowPage() {
-  window.location.href = "how.html";
-}
+async function copyCode() {
+  const output = document.getElementById("licenseOutput");
+  const copyMsg = document.getElementById("copyMsg");
 
-function goBackHome() {
-  window.location.href = "index.html";
+  if (!output || !copyMsg) return;
+
+  try {
+    await navigator.clipboard.writeText(output.value);
+    copyMsg.textContent = "Copied.";
+  } catch (error) {
+    copyMsg.textContent = "Could not copy.";
+  }
 }
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && document.activeElement?.id === "codeInput") {
     verifyCode();
-  }
-
-  if (event.key === "Enter" && document.activeElement?.id === "nextBotCodeInput") {
-    submitNextBotCode();
   }
 });
