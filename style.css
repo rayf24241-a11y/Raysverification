@@ -8,7 +8,6 @@
   --card: rgba(12, 18, 36, 0.82);
   --card-2: rgba(255, 255, 255, 0.06);
   --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.22);
   --text: #f5f7ff;
   --soft: #d6def7;
   --placeholder: #cfd7f8;
@@ -21,7 +20,6 @@
     0 30px 80px rgba(0, 0, 0, 0.45),
     0 8px 20px rgba(0, 0, 0, 0.22);
   --radius-xl: 30px;
-  --radius-lg: 22px;
 }
 
 html,
@@ -124,15 +122,6 @@ body {
   overflow: hidden;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.06), transparent 30%, transparent 70%, rgba(255,255,255,0.03));
-  pointer-events: none;
-}
-
 .top-row {
   display: flex;
   align-items: center;
@@ -157,7 +146,6 @@ body {
   border: 1px solid rgba(255,255,255,0.12);
   font-size: 14px;
   font-weight: 900;
-  letter-spacing: 0.2px;
   color: #ffffff;
 }
 
@@ -174,12 +162,13 @@ h1 {
   font-size: 62px;
   line-height: 0.98;
   letter-spacing: -2px;
+  color: #ffffff;
   position: relative;
   z-index: 1;
-  color: #ffffff;
 }
 
-.center-title {
+.center-title,
+.loading-title {
   text-align: center;
 }
 
@@ -209,7 +198,6 @@ h1 {
   color: #ecf1ff;
   font-size: 13px;
   font-weight: 900;
-  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
@@ -234,14 +222,12 @@ input {
   color: #ffffff;
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: 0.4px;
   transition: 0.22s ease;
 }
 
 input::placeholder {
   color: var(--placeholder);
   opacity: 1;
-  font-weight: 700;
 }
 
 input:focus {
@@ -270,13 +256,6 @@ input:focus {
 
 .main-btn:hover {
   transform: translateY(-2px) scale(1.01);
-  box-shadow:
-    0 20px 40px rgba(255,255,255,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-.main-btn:active {
-  transform: translateY(0) scale(0.995);
 }
 
 .main-btn:disabled {
@@ -308,7 +287,6 @@ input:focus {
 
 .result.success {
   color: var(--success);
-  text-shadow: 0 0 20px rgba(57, 255, 136, 0.2);
 }
 
 .result.error {
@@ -330,21 +308,10 @@ input:focus {
   font-size: 14px;
   font-weight: 900;
   cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow: 0 10px 22px rgba(255,255,255,0.12);
-}
-
-.how-btn:hover {
-  background: #e6ebff;
-  transform: translateY(-1px);
 }
 
 .loading-card {
   max-width: 620px;
-  text-align: center;
-}
-
-.loading-title {
   text-align: center;
 }
 
@@ -401,14 +368,6 @@ input:focus {
   font-size: 18px;
   font-weight: 900;
   cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow:
-    0 12px 24px rgba(255,255,255,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.85);
-}
-
-.big-copy-btn:hover {
-  transform: translateY(-1px);
 }
 
 .copy-msg {

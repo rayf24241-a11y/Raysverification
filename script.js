@@ -30,7 +30,6 @@ async function verifyCode() {
     if (!data.success) {
       result.textContent = data.message || "Invalid code.";
       result.classList.add("error");
-      verifyBtn.disabled = false;
       return;
     }
 
@@ -46,7 +45,6 @@ async function verifyCode() {
     if (!linkData.success) {
       result.textContent = "Verified, but failed to create your next code.";
       result.classList.add("error");
-      verifyBtn.disabled = false;
       return;
     }
 
@@ -58,7 +56,6 @@ async function verifyCode() {
     setTimeout(() => {
       window.location.href = "loading.html";
     }, 700);
-
   } catch (err) {
     console.error(err);
     result.textContent = "Error verifying code.";
