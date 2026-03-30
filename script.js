@@ -2,10 +2,12 @@ async function verifyCode() {
   const input = document.getElementById("codeInput");
   const result = document.getElementById("result");
   const verifyBtn = document.getElementById("verifyBtn");
+  const btnText = verifyBtn.querySelector(".btn-text");
+  const btnLoader = verifyBtn.querySelector(".btn-loader");
   const successBox = document.getElementById("successBox");
   const gameCodeBox = document.getElementById("gameCodeBox");
   const gameCodeOutput = document.getElementById("gameCodeOutput");
-  const copyMsg = document.getElementById("copyMsg");
+  const copyResult = document.getElementById("copyResult");
 
   const code = input.value.trim().toUpperCase();
 
@@ -13,7 +15,8 @@ async function verifyCode() {
   result.className = "result";
   successBox.classList.add("hidden");
   gameCodeBox.classList.add("hidden");
-  copyMsg.textContent = "";
+  gameCodeOutput.value = "";
+  copyResult.textContent = "";
 
   if (!code) {
     result.textContent = "Enter a code first.";
@@ -35,16 +38,17 @@ async function verifyCode() {
     const data = await response.json();
 
     if (data.success) {
+      const generatedCode = generateGameCode();
+      localStorage.setItem("generatedGameCode", generatedCode);
       result.textContent = "Verified successfully";
       result.classList.add("success");
       successBox.classList.remove("hidden");
-
-      setTimeout(() => {
-        gameCodeBox.classList.remove("hidden");
-        gameCodeOutput.value = generateGameCode();
-      }, 900);
-
       input.value = "";
+
+      await new Promise(resolve => setTimeout(resolve, 900));
+
+      gameCodeBox.classList.remove("hidden");
+      gameCodeOutput.value = "";
     } else {
       result.textContent = data.message || "Invalid code.";
       result.classList.add("error");

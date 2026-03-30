@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Game Code</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
+    <div class="grid"></div>
+    <div class="stars"></div>
+  </div>
+
+  <main class="page">
+    <section class="card code-page-card">
+      <div class="top-row center-top">
+        <div class="badge">Game Code</div>
+      </div>
+
+      <h1 class="center-title">Your Code Is Ready</h1>
+      <p class="subtext center-subtext">Copy this code and use it for the next step.</p>
+
+      <div class="code-center-wrap">
+        <input
+          id="gameCodeOutput"
+          class="game-code-output center-code"
+          type="text"
+          readonly
+          placeholder="Your code will appear here"
+        />
+        <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy</button>
+        <div id="copyMsg" class="copy-msg"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const savedCode = localStorage.getItem("generatedGameCode") || "";
+    document.getElementById("gameCodeOutput").value = savedCode;
+  </script>
+</body>
+</html>

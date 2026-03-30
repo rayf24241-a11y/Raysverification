@@ -8,15 +8,18 @@
 </head>
 <body>
   <div class="bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
     <div class="grid"></div>
-    <div class="noise"></div>
+    <div class="stars"></div>
   </div>
 
   <main class="page">
     <section class="card how-card">
-      <div class="badge">Instructions</div>
+      <div class="top-row">
+        <div class="badge">Instructions</div>
+        <div class="status-dot"></div>
+      </div>
 
       <h1>How to Get Your Code</h1>
       <p class="subtext">Follow these steps in order.</p>
@@ -26,41 +29,38 @@
           <div class="step-num">1</div>
           <div class="step-content">
             <h3>Open Discord</h3>
-            <p>Go to the server where the verify bot is located.</p>
+            <p>Go to the server where the verify bot is.</p>
           </div>
         </div>
 
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-content">
-            <h3>Use the command</h3>
-            <p>Type <span class="inline-code">/verify</span> in the server.</p>
+            <h3>Use /verify</h3>
+            <p>Type <span class="inline-code">/verify</span> and copy the code the bot gives you.</p>
           </div>
         </div>
 
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-content">
-            <h3>Copy the code</h3>
-            <p>The bot will send you a code. Copy that exact code.</p>
+            <h3>Paste it here</h3>
+            <p>Come back to this website and paste the code into the verify box.</p>
           </div>
         </div>
 
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-content">
-            <h3>Come back here</h3>
-            <p>Paste the code into the box on the main page and press Verify.</p>
+            <h3>Wait for your code</h3>
+            <p>After verifying, the site will load and give you your next code.</p>
           </div>
         </div>
       </div>
 
-      <div class="example-box">
-        <strong>Example format:</strong>
-        <span class="inline-code">ABC123</span>
+      <div class="bottom-actions">
+        <button class="how-btn" onclick="goBackHome()">Back</button>
       </div>
-
-      <button class="main-btn" onclick="goBackHome()">Back</button>
     </section>
   </main>
 
