@@ -27,12 +27,13 @@ module.exports = async (req, res) => {
 
     const code = makeLinkCode();
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("link_codes")
       .insert({
         code,
         used: false
-      });
+      })
+      .select();
 
     if (error) {
       return res.status(500).json({
@@ -44,7 +45,8 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      code
+      code,
+      saved: data
     });
   } catch (err) {
     return res.status(500).json({
