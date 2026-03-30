@@ -248,19 +248,6 @@ input:focus {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: 0.22s ease;
-  box-shadow:
-    0 16px 36px rgba(255,255,255,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.8);
-}
-
-.main-btn:hover {
-  transform: translateY(-2px) scale(1.01);
-}
-
-.main-btn:disabled {
-  cursor: wait;
-  opacity: 0.85;
 }
 
 .btn-text {
@@ -291,23 +278,6 @@ input:focus {
 
 .result.error {
   color: var(--danger);
-}
-
-.bottom-actions {
-  margin-top: 28px;
-  position: relative;
-  z-index: 1;
-}
-
-.how-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #111522;
-  font-size: 14px;
-  font-weight: 900;
-  cursor: pointer;
 }
 
 .loading-card {
@@ -425,6 +395,21 @@ input:focus {
   font-weight: 800;
 }
 
+.bottom-actions {
+  margin-top: 28px;
+}
+
+.how-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111522;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -466,39 +451,5 @@ input:focus {
   }
   to {
     width: 100%;
-  }
-}
-
-@media (max-width: 760px) {
-  .page {
-    padding: 18px;
-  }
-
-  .card {
-    padding: 28px 20px 22px;
-    border-radius: 24px;
-  }
-
-  h1 {
-    font-size: 42px;
-    letter-spacing: -1.5px;
-  }
-
-  .subtext {
-    font-size: 15px;
-  }
-
-  input {
-    font-size: 18px;
-    padding: 18px 16px;
-  }
-
-  .main-btn {
-    min-height: 60px;
-    font-size: 22px;
-  }
-
-  .game-code-output.center-code {
-    font-size: 20px;
   }
 }

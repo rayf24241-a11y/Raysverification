@@ -9,7 +9,7 @@ async function verifyCode() {
   result.className = "result";
 
   if (!code) {
-    result.textContent = "Enter a code first.";
+    result.textContent = "Paste a code first.";
     result.classList.add("error");
     return;
   }
@@ -33,24 +33,10 @@ async function verifyCode() {
       return;
     }
 
-    const linkResponse = await fetch("/api/create-link-code", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    const generatedCode = generateHackCode();
+    localStorage.setItem("generatedGameCode", generatedCode);
 
-    const linkData = await linkResponse.json();
-
-    if (!linkData.success) {
-      result.textContent = "Verified, but failed to create your next code.";
-      result.classList.add("error");
-      return;
-    }
-
-    localStorage.setItem("generatedGameCode", linkData.code);
-
-    result.textContent = "Verified successfully";
+    result.textContent = "Code accepted";
     result.classList.add("success");
 
     setTimeout(() => {
@@ -58,11 +44,22 @@ async function verifyCode() {
     }, 700);
   } catch (err) {
     console.error(err);
-    result.textContent = "Error verifying code.";
+    result.textContent = "Error checking code.";
     result.classList.add("error");
   } finally {
     verifyBtn.disabled = false;
   }
+}
+
+function generateHackCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let result = "HACK-";
+
+  for (let i = 0; i < 8; i++) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
 }
 
 async function copyCode() {
@@ -75,14 +72,6 @@ async function copyCode() {
   } catch (error) {
     copyMsg.textContent = "Could not copy.";
   }
-}
-
-function goToHowPage() {
-  window.location.href = "how.html";
-}
-
-function goBackHome() {
-  window.location.href = "index.html";
 }
 
 document.addEventListener("keydown", (event) => {

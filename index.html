@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verify Code</title>
+  <title>New Code</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,21 +17,21 @@
   <main class="page">
     <section class="card">
       <div class="top-row">
-        <div class="badge">Verification Portal</div>
+        <div class="badge">Code Portal</div>
         <div class="status-dot"></div>
       </div>
 
-      <h1>Verify Code?</h1>
-      <p class="subtext">Enter the code you got from Discord to continue.</p>
+      <h1>New Code?</h1>
+      <p class="subtext">Paste the code you got from the bot.</p>
 
       <div class="input-area">
-        <label for="codeInput" class="input-label">Verification Code</label>
+        <label for="codeInput" class="input-label">Bot Code</label>
         <div class="input-shell">
           <input
             id="codeInput"
             type="text"
-            placeholder="Enter your code"
-            maxlength="30"
+            placeholder="Paste your code here"
+            maxlength="40"
             autocomplete="off"
             spellcheck="false"
           />
@@ -39,15 +39,11 @@
       </div>
 
       <button id="verifyBtn" class="main-btn" onclick="verifyCode()">
-        <span class="btn-text">Verify</span>
+        <span class="btn-text">Continue</span>
         <span class="btn-glow"></span>
       </button>
 
       <div id="result" class="result"></div>
-
-      <div class="bottom-actions">
-        <button class="how-btn" onclick="goToHowPage()">How to get</button>
-      </div>
     </section>
   </main>
 

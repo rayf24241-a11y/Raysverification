@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loading Your Code</title>
+  <title>New Code</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,22 +15,38 @@
   </div>
 
   <main class="page">
-    <section class="card loading-card">
-      <div class="loading-spinner"></div>
-      <h1 class="loading-title">Loading Your Code</h1>
-      <p class="subtext loading-subtext">Please wait while we make your code.</p>
-
-      <div class="loading-bar">
-        <div class="loading-bar-fill"></div>
+    <section class="card">
+      <div class="top-row">
+        <div class="badge">Code Portal</div>
+        <div class="status-dot"></div>
       </div>
+
+      <h1>New Code?</h1>
+      <p class="subtext">Paste the code you got from the bot.</p>
+
+      <div class="input-area">
+        <label for="codeInput" class="input-label">Bot Code</label>
+        <div class="input-shell">
+          <input
+            id="codeInput"
+            type="text"
+            placeholder="Paste your code here"
+            maxlength="40"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+
+      <button id="verifyBtn" class="main-btn" onclick="verifyCode()">
+        <span class="btn-text">Continue</span>
+        <span class="btn-glow"></span>
+      </button>
+
+      <div id="result" class="result"></div>
     </section>
   </main>
 
-  <script>
-    const waitTime = Math.floor(Math.random() * 3000) + 3000;
-    setTimeout(() => {
-      window.location.href = "game-code.html";
-    }, waitTime);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
