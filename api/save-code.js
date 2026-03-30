@@ -33,14 +33,10 @@ module.exports = async (req, res) => {
 
     const { data, error } = await supabase
       .from("verify_codes")
-      .upsert(
-        {
-          code: cleanCode,
-          used: false,
-          created_at: new Date().toISOString()
-        },
-        { onConflict: "code" }
-      )
+      .insert({
+        code: cleanCode,
+        used: false
+      })
       .select();
 
     if (error) {
