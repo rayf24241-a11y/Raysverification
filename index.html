@@ -1,25 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Rays Market</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Code</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="page">
+    <div class="card">
+      <h1>Verify Code?</h1>
+      <p class="subtext">Enter the code you got from Discord.</p>
 
-<div class="navbar">
-  <div class="logo">Rays Market</div>
+      <input id="codeInput" type="text" placeholder="Enter code here" maxlength="20" />
+      <button class="main-btn" onclick="verifyCode()">Verify</button>
 
-  <div class="tabs">
-    <button onclick="showPage('home')" class="active">Home</button>
-    <button onclick="showPage('market')">Market</button>
-    <button onclick="showPage('verify')">Verify</button>
-    <button onclick="showPage('creation')">Creation</button>
+      <p id="result" class="result"></p>
+
+      <button class="how-btn" onclick="toggleHowToGet()">How to get</button>
+
+      <div id="howBox" class="how-box hidden">
+        <h2>How to get your code</h2>
+        <ol>
+          <li>Open the Discord server.</li>
+          <li>Find the verify command or verify channel.</li>
+          <li>Type <span class="code">/verify</span>.</li>
+          <li>Discord will give you a code.</li>
+          <li>Copy that code.</li>
+          <li>Come back to this website.</li>
+          <li>Paste the code into the box.</li>
+          <li>Press <span class="code">Verify</span>.</li>
+        </ol>
+        <p class="note">Example code: <span class="code">735345</span></p>
+      </div>
+    </div>
   </div>
-</div>
 
-<div id="content" class="content"></div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
