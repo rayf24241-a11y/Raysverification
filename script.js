@@ -3,22 +3,25 @@ function verifyCode() {
   const result = document.getElementById("result");
   const code = input.value.trim();
 
-  if (code === "") {
-    result.textContent = "Please enter a code.";
-    result.style.color = "#ff6666";
+  if (!code) {
+    result.textContent = "Please enter your code first.";
+    result.style.color = "#ffb3b3";
     return;
   }
 
-  if (code === "735345") {
+  if (code === "123456") {
     result.textContent = "Code verified successfully.";
-    result.style.color = "#00ff88";
+    result.style.color = "#ffffff";
   } else {
     result.textContent = "That code is not correct.";
-    result.style.color = "#ff6666";
+    result.style.color = "#ffb3b3";
   }
 }
 
-function toggleHowToGet() {
-  const howBox = document.getElementById("howBox");
-  howBox.classList.toggle("hidden");
+function goToHowPage() {
+  window.location.href = "how.html";
+}
+
+function goBackHome() {
+  window.location.href = "index.html";
 }
