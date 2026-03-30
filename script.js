@@ -2,21 +2,11 @@ async function verifyCode() {
   const input = document.getElementById("codeInput");
   const result = document.getElementById("result");
   const verifyBtn = document.getElementById("verifyBtn");
-  const btnText = verifyBtn.querySelector(".btn-text");
-  const btnLoader = verifyBtn.querySelector(".btn-loader");
-  const successBox = document.getElementById("successBox");
-  const gameCodeBox = document.getElementById("gameCodeBox");
-  const gameCodeOutput = document.getElementById("gameCodeOutput");
-  const copyResult = document.getElementById("copyResult");
 
   const code = input.value.trim().toUpperCase();
 
   result.textContent = "";
   result.className = "result";
-  successBox.classList.add("hidden");
-  gameCodeBox.classList.add("hidden");
-  gameCodeOutput.value = "";
-  copyResult.textContent = "";
 
   if (!code) {
     result.textContent = "Enter a code first.";
@@ -38,17 +28,12 @@ async function verifyCode() {
     const data = await response.json();
 
     if (data.success) {
-      const generatedCode = generateGameCode();
-      localStorage.setItem("generatedGameCode", generatedCode);
-      result.textContent = "Verified successfully";
+      result.textContent = "Verified successfully.";
       result.classList.add("success");
-      successBox.classList.remove("hidden");
-      input.value = "";
 
-      await new Promise(resolve => setTimeout(resolve, 900));
-
-      gameCodeBox.classList.remove("hidden");
-      gameCodeOutput.value = "";
+      setTimeout(() => {
+        window.location.href = "loading.html";
+      }, 700);
     } else {
       result.textContent = data.message || "Invalid code.";
       result.classList.add("error");
@@ -82,6 +67,18 @@ async function copyCode() {
     copyMsg.textContent = "Copied.";
   } catch (error) {
     copyMsg.textContent = "Could not copy.";
+  }
+}
+
+async function copyGameCode() {
+  const gameCodeOutput = document.getElementById("gameCodeOutput");
+  const copyResult = document.getElementById("copyResult");
+
+  try {
+    await navigator.clipboard.writeText(gameCodeOutput.value);
+    copyResult.textContent = "Copied.";
+  } catch (error) {
+    copyResult.textContent = "Could not copy.";
   }
 }
 

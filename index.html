@@ -62,8 +62,16 @@
           <button id="copyBtn" class="copy-btn" onclick="copyGameCode()">Copy</button>
         </div>
 
-        <p id="copyResult" class="copy-result"></p>
-      </div>
+    <!-- GAME CODE BOX -->
+    <div id="gameCodeBox" class="hidden">
+      <input id="gameCodeOutput" readonly placeholder="Your game code will appear here">
+      <button onclick="copyCode()" class="copy-btn">Copy</button>
+    </div>
+
+    <button class="how-btn" onclick="goToHowPage()">How to get</button>
+
+  </div>
+</div>
 
       <button class="how-btn" onclick="goToHowPage()">How to get</button>
     </section>
