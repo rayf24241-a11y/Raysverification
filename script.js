@@ -1,10 +1,11 @@
 async function verifyCode() {
   const input = document.getElementById("codeInput");
   const result = document.getElementById("result");
+
   const code = input.value.trim();
 
   if (!code) {
-    result.textContent = "Please enter your code first.";
+    result.textContent = "Enter a code first.";
     result.style.color = "#ffb3b3";
     return;
   }
@@ -21,15 +22,16 @@ async function verifyCode() {
     const data = await response.json();
 
     if (data.success) {
-      result.textContent = "Code verified successfully.";
+      result.textContent = "✅ Verified successfully!";
       result.style.color = "#ffffff";
     } else {
-      result.textContent = data.message || "Invalid code.";
+      result.textContent = "❌ Invalid code.";
       result.style.color = "#ffb3b3";
     }
+
   } catch (error) {
     console.error(error);
-    result.textContent = "Something went wrong.";
+    result.textContent = "❌ Error verifying code.";
     result.style.color = "#ffb3b3";
   }
 }
