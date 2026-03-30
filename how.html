@@ -7,49 +7,51 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="background-glow"></div>
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid"></div>
+    <div class="noise"></div>
+  </div>
 
   <main class="page">
     <section class="card how-card">
-      <div class="top-badge">Instructions</div>
+      <div class="badge">Instructions</div>
 
       <h1>How to Get Your Code</h1>
-      <p class="subtext">Follow these steps exactly.</p>
+      <p class="subtext">Follow these steps in order.</p>
 
       <div class="steps">
         <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-text">Open the Discord server.</div>
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Open Discord</h3>
+            <p>Go to the server where the verify bot is located.</p>
+          </div>
         </div>
 
         <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-text">Go to the channel where verification happens.</div>
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Use the command</h3>
+            <p>Type <span class="inline-code">/verify</span> in the server.</p>
+          </div>
         </div>
 
         <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-text">Type <span class="inline-code">/verify</span>.</div>
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Copy the code</h3>
+            <p>The bot will send you a code. Copy that exact code.</p>
+          </div>
         </div>
 
         <div class="step">
-          <div class="step-number">4</div>
-          <div class="step-text">The bot will send you a code.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-number">5</div>
-          <div class="step-text">Copy the code you get.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-number">6</div>
-          <div class="step-text">Come back to the website.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-number">7</div>
-          <div class="step-text">Paste the code into the box and press Verify.</div>
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Come back here</h3>
+            <p>Paste the code into the box on the main page and press Verify.</p>
+          </div>
         </div>
       </div>
 
@@ -58,7 +60,7 @@
         <span class="inline-code">ABC123</span>
       </div>
 
-      <button class="back-btn" onclick="goBackHome()">Back</button>
+      <button class="main-btn" onclick="goBackHome()">Back</button>
     </section>
   </main>
 
