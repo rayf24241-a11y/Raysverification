@@ -27,20 +27,38 @@ async function verifyCode() {
 
     const data = await response.json();
 
-    if (data.success) {
-      const generatedCode = generateGameCode();
-      localStorage.setItem("generatedGameCode", generatedCode);
-
-      result.textContent = "Verified successfully";
-      result.classList.add("success");
-
-      setTimeout(() => {
-        window.location.href = "loading.html";
-      }, 700);
-    } else {
+    if (!data.success) {
       result.textContent = data.message || "Invalid code.";
       result.classList.add("error");
+      verifyBtn.disabled = false;
+      return;
     }
+
+    const linkResponse = await fetch("/api/create-link-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const linkData = await linkResponse.json();
+
+    if (!linkData.success) {
+      result.textContent = "Verified, but failed to create your next code.";
+      result.classList.add("error");
+      verifyBtn.disabled = false;
+      return;
+    }
+
+    localStorage.setItem("generatedGameCode", linkData.code);
+
+    result.textContent = "Verified successfully";
+    result.classList.add("success");
+
+    setTimeout(() => {
+      window.location.href = "loading.html";
+    }, 700);
+
   } catch (err) {
     console.error(err);
     result.textContent = "Error verifying code.";
@@ -48,17 +66,6 @@ async function verifyCode() {
   } finally {
     verifyBtn.disabled = false;
   }
-}
-
-function generateGameCode() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let result = "GAME-";
-
-  for (let i = 0; i < 8; i++) {
-    result += chars[Math.floor(Math.random() * chars.length)];
-  }
-
-  return result;
 }
 
 async function copyCode() {
