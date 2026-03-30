@@ -2,10 +2,17 @@ const { createClient } = require("@supabase/supabase-js");
 
 module.exports = async (req, res) => {
   try {
-    const supabase = createClient(
-      process.env.SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return res.status(500).json({
+        success: false,
+        message: "Missing Supabase env vars"
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     if (req.method !== "POST") {
       return res.status(405).json({
