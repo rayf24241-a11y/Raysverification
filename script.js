@@ -28,7 +28,10 @@ async function verifyCode() {
     const data = await response.json();
 
     if (data.success) {
-      result.textContent = "Verified successfully.";
+      const generatedCode = generateGameCode();
+      localStorage.setItem("generatedGameCode", generatedCode);
+
+      result.textContent = "Verified successfully";
       result.classList.add("success");
 
       setTimeout(() => {
@@ -67,18 +70,6 @@ async function copyCode() {
     copyMsg.textContent = "Copied.";
   } catch (error) {
     copyMsg.textContent = "Could not copy.";
-  }
-}
-
-async function copyGameCode() {
-  const gameCodeOutput = document.getElementById("gameCodeOutput");
-  const copyResult = document.getElementById("copyResult");
-
-  try {
-    await navigator.clipboard.writeText(gameCodeOutput.value);
-    copyResult.textContent = "Copied.";
-  } catch (error) {
-    copyResult.textContent = "Could not copy.";
   }
 }
 

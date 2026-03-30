@@ -1,83 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verify Code</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <div class="bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
     <div class="grid"></div>
-    <div class="noise"></div>
+    <div class="stars"></div>
   </div>
 
   <main class="page">
     <section class="card">
-      <div class="badge">Verification Portal</div>
+      <div class="top-row">
+        <div class="badge">Verification Portal</div>
+        <div class="status-dot"></div>
+      </div>
 
       <h1>Verify Code?</h1>
       <p class="subtext">Enter the code you got from Discord to continue.</p>
 
-      <div class="input-wrap">
-        <input
-          id="codeInput"
-          type="text"
-          placeholder="Enter your code"
-          maxlength="30"
-          autocomplete="off"
-          spellcheck="false"
-        />
+      <div class="input-area">
+        <label for="codeInput" class="input-label">Verification Code</label>
+        <div class="input-shell">
+          <input
+            id="codeInput"
+            type="text"
+            placeholder="Enter your code"
+            maxlength="30"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
       </div>
 
       <button id="verifyBtn" class="main-btn" onclick="verifyCode()">
         <span class="btn-text">Verify</span>
-        <span class="btn-loader hidden"></span>
+        <span class="btn-glow"></span>
       </button>
 
-      <p id="result" class="result"></p>
+      <div id="result" class="result"></div>
 
-      <div id="successBox" class="success-box hidden">
-        <div class="success-icon">✓</div>
-        <div>
-          <div class="success-title">Verified</div>
-          <div class="success-subtitle">Your code was accepted successfully.</div>
-        </div>
+      <div class="bottom-actions">
+        <button class="how-btn" onclick="goToHowPage()">How to get</button>
       </div>
-
-      <div id="gameCodeBox" class="game-code-box hidden">
-        <div class="game-code-title">Please wait while we make your game code.</div>
-        <div class="game-code-subtitle">Your code box will appear below.</div>
-
-        <div class="game-code-wrap">
-          <input
-            id="gameCodeOutput"
-            class="game-code-input"
-            type="text"
-            value=""
-            readonly
-            placeholder=""
-          />
-          <button id="copyBtn" class="copy-btn" onclick="copyGameCode()">Copy</button>
-        </div>
-
-    <!-- GAME CODE BOX -->
-    <div id="gameCodeBox" class="hidden">
-      <input id="gameCodeOutput" readonly placeholder="Your game code will appear here">
-      <button onclick="copyCode()" class="copy-btn">Copy</button>
-    </div>
-
-    <button class="how-btn" onclick="goToHowPage()">How to get</button>
-
-  </div>
-</div>
-
-      <button class="how-btn" onclick="goToHowPage()">How to get</button>
     </section>
   </main>
 
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>

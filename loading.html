@@ -18,7 +18,8 @@
     <section class="card loading-card">
       <div class="loading-spinner"></div>
       <h1 class="loading-title">Loading Your Code</h1>
-      <p class="subtext">Please wait while we make your code.</p>
+      <p class="subtext loading-subtext">Please wait while we make your code.</p>
+
       <div class="loading-bar">
         <div class="loading-bar-fill"></div>
       </div>
@@ -27,7 +28,6 @@
 
   <script>
     const waitTime = Math.floor(Math.random() * 3000) + 3000;
-
     setTimeout(() => {
       window.location.href = "game-code.html";
     }, waitTime);
