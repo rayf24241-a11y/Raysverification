@@ -1,5 +1,55 @@
+const { createClient } = require("@supabase/supabase-js");
+
 module.exports = async (req, res) => {
-  return res.status(200).json({
-    test: "HELLO_FROM_NEW_FILE"
-  });
+  try {
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
+    if (req.method !== "POST") {
+      return res.status(405).json({
+        success: false,
+        message: "Method not allowed"
+      });
+    }
+
+    const { code } = req.body || {};
+    const cleanCode = String(code || "").trim().toUpperCase();
+
+    if (!cleanCode) {
+      return res.status(400).json({
+        success: false,
+        message: "No code provided"
+      });
+    }
+
+    const { data, error } = await supabase
+      .from("verify_codes")
+      .insert({
+        code: cleanCode,
+        used: false
+      })
+      .select();
+
+    if (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Supabase save error",
+        error: error.message
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Code saved",
+      saved: data
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message
+    });
+  }
 };
