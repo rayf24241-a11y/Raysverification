@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Code</title>
+  <title>Give This Code To The Bot</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,22 +17,24 @@
   <main class="page">
     <section class="card code-page-card">
       <div class="top-row center-top">
-        <div class="badge">Hack Code</div>
+        <div class="badge">Step 2</div>
       </div>
 
-      <h1 class="center-title">Your Code Is Ready</h1>
-      <p class="subtext center-subtext">Copy this code and use it for the next step.</p>
+      <h1 class="center-title">Give This Code To The Bot</h1>
+      <p class="subtext center-subtext">
+        Copy this website code, then go to Discord and use <b>/linkverify</b> with this code.
+      </p>
 
       <div class="code-center-wrap">
-        <label for="gameCodeOutput" class="input-label center-label">Generated Code</label>
+        <label for="gameCodeOutput" class="input-label center-label">Website Link Code</label>
         <input
           id="gameCodeOutput"
           class="game-code-output center-code"
           type="text"
           readonly
-          placeholder="Your code will appear here"
+          placeholder="Your website code will appear here"
         />
-        <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy</button>
+        <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy Code</button>
         <div id="copyMsg" class="copy-msg"></div>
       </div>
     </section>

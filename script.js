@@ -9,7 +9,7 @@ async function verifyCode() {
   result.className = "result";
 
   if (!code) {
-    result.textContent = "Enter a code first.";
+    result.textContent = "Paste the bot code first.";
     result.classList.add("error");
     return;
   }
@@ -29,9 +29,8 @@ async function verifyCode() {
     console.log("verify-code response:", data);
 
     if (!data.success) {
-      result.textContent = data.message || "Invalid code.";
+      result.textContent = data.message || "That bot code is invalid.";
       result.classList.add("error");
-      verifyBtn.disabled = false;
       return;
     }
 
@@ -46,15 +45,14 @@ async function verifyCode() {
     console.log("create-link-code response:", linkData);
 
     if (!linkData.success || !linkData.code) {
-      result.textContent = "Verified, but failed to make your next code.";
+      result.textContent = "Bot code worked, but website code could not be created.";
       result.classList.add("error");
-      verifyBtn.disabled = false;
       return;
     }
 
     localStorage.setItem("generatedGameCode", linkData.code);
 
-    result.textContent = "Verified successfully";
+    result.textContent = "Bot code verified successfully.";
     result.classList.add("success");
 
     setTimeout(() => {
@@ -62,7 +60,7 @@ async function verifyCode() {
     }, 700);
   } catch (err) {
     console.error(err);
-    result.textContent = "Error verifying code.";
+    result.textContent = "Error checking bot code.";
     result.classList.add("error");
   } finally {
     verifyBtn.disabled = false;
@@ -75,22 +73,8 @@ async function copyCode() {
 
   try {
     await navigator.clipboard.writeText(gameCodeOutput.value);
-    copyMsg.textContent = "Copied.";
+    copyMsg.textContent = "Copied. Now paste it into /linkverify in Discord.";
   } catch (error) {
     copyMsg.textContent = "Could not copy.";
   }
 }
-
-function goToHowPage() {
-  window.location.href = "how.html";
-}
-
-function goBackHome() {
-  window.location.href = "index.html";
-}
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && document.activeElement?.id === "codeInput") {
-    verifyCode();
-  }
-});
