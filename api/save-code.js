@@ -22,8 +22,9 @@ module.exports = async (req, res) => {
     }
 
     const { code } = req.body || {};
+    const cleanCode = String(code || "").trim().toUpperCase();
 
-    if (!code) {
+    if (!cleanCode) {
       return res.status(400).json({
         success: false,
         message: "No code provided"
@@ -34,7 +35,7 @@ module.exports = async (req, res) => {
       .from("verify_codes")
       .upsert(
         {
-          code: code.toUpperCase(),
+          code: cleanCode,
           used: false,
           created_at: new Date().toISOString()
         },
