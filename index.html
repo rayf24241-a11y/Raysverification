@@ -7,22 +7,45 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="background-glow"></div>
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid"></div>
+    <div class="noise"></div>
+  </div>
 
   <main class="page">
     <section class="card">
-      <div class="top-badge">Verification</div>
+      <div class="badge">Verification Portal</div>
 
       <h1>Verify Code?</h1>
       <p class="subtext">Enter the code you got from Discord to continue.</p>
 
       <div class="input-wrap">
-        <input id="codeInput" type="text" placeholder="Enter your code" maxlength="30" />
+        <input
+          id="codeInput"
+          type="text"
+          placeholder="Enter your code"
+          maxlength="30"
+          autocomplete="off"
+          spellcheck="false"
+        />
       </div>
 
-      <button class="main-btn" onclick="verifyCode()">Verify</button>
+      <button id="verifyBtn" class="main-btn" onclick="verifyCode()">
+        <span class="btn-text">Verify</span>
+        <span class="btn-loader hidden"></span>
+      </button>
 
       <p id="result" class="result"></p>
+
+      <div id="successBox" class="success-box hidden">
+        <div class="success-icon">✓</div>
+        <div>
+          <div class="success-title">Verified</div>
+          <div class="success-subtitle">Your code was accepted successfully.</div>
+        </div>
+      </div>
 
       <button class="how-btn" onclick="goToHowPage()">How to get</button>
     </section>
