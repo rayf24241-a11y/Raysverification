@@ -3,6 +3,8 @@ async function verifyCode() {
   const result = document.getElementById("result");
   const verifyBtn = document.getElementById("verifyBtn");
 
+  if (!input || !result || !verifyBtn) return;
+
   const code = input.value.trim().toUpperCase();
 
   result.textContent = "";
@@ -26,7 +28,6 @@ async function verifyCode() {
     });
 
     const data = await response.json();
-    console.log("verify-code response:", data);
 
     if (!data.success) {
       result.textContent = data.message || "That bot code is invalid.";
@@ -42,7 +43,6 @@ async function verifyCode() {
     });
 
     const linkData = await linkResponse.json();
-    console.log("create-link-code response:", linkData);
 
     if (!linkData.success || !linkData.code) {
       result.textContent = "Bot code worked, but website code could not be created.";
@@ -71,6 +71,8 @@ async function copyCode() {
   const gameCodeOutput = document.getElementById("gameCodeOutput");
   const copyMsg = document.getElementById("copyMsg");
 
+  if (!gameCodeOutput || !copyMsg) return;
+
   try {
     await navigator.clipboard.writeText(gameCodeOutput.value);
     copyMsg.textContent = "Copied. Now paste it into /linkverify in Discord.";
@@ -78,3 +80,64 @@ async function copyCode() {
     copyMsg.textContent = "Could not copy.";
   }
 }
+
+function submitNextBotCode() {
+  const input = document.getElementById("nextBotCodeInput");
+  const result = document.getElementById("finalResult");
+  const box = document.getElementById("finalThingBox");
+  const text = document.getElementById("finalThingText");
+  const codeBox = document.getElementById("finalThingCode");
+
+  if (!input || !result || !box || !text || !codeBox) return;
+
+  const nextCode = input.value.trim().toUpperCase();
+
+  result.textContent = "";
+  result.className = "result";
+  box.classList.add("hidden");
+
+  if (!nextCode) {
+    result.textContent = "Paste the next bot code first.";
+    result.classList.add("error");
+    return;
+  }
+
+  // For now this accepts any non-empty code.
+  // Later you can connect this to Supabase or another API.
+  result.textContent = "Codes correct";
+  result.classList.add("success");
+
+  text.textContent = "Codes correct. Discord user linked. Your actual thing is ready.";
+  codeBox.textContent = "REAL-" + makeFinalThingCode();
+
+  box.classList.remove("hidden");
+}
+
+function makeFinalThingCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let result = "";
+
+  for (let i = 0; i < 10; i++) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
+}
+
+function goToHowPage() {
+  window.location.href = "how.html";
+}
+
+function goBackHome() {
+  window.location.href = "index.html";
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && document.activeElement?.id === "codeInput") {
+    verifyCode();
+  }
+
+  if (event.key === "Enter" && document.activeElement?.id === "nextBotCodeInput") {
+    submitNextBotCode();
+  }
+});

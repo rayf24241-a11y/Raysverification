@@ -37,6 +37,42 @@
         <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy Code</button>
         <div id="copyMsg" class="copy-msg"></div>
       </div>
+
+      <div class="next-step-box">
+        <h2 class="next-step-title">Get The Next Bot Code</h2>
+        <p class="next-step-subtext">
+          After the bot gives you the next code, paste it below.
+        </p>
+
+        <div class="input-area">
+          <label for="nextBotCodeInput" class="input-label center-label">Next Bot Code</label>
+          <div class="input-shell">
+            <input
+              id="nextBotCodeInput"
+              type="text"
+              placeholder="Paste the next bot code here"
+              maxlength="50"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <button class="main-btn" onclick="submitNextBotCode()">
+          <span class="btn-text">Submit Next Bot Code</span>
+          <span class="btn-glow"></span>
+        </button>
+
+        <div id="finalResult" class="result"></div>
+
+        <div id="finalThingBox" class="final-thing-box hidden">
+          <div class="final-thing-title">All Set</div>
+          <div class="final-thing-text" id="finalThingText">
+            Codes correct. Discord user linked. Your actual thing is ready.
+          </div>
+          <div class="final-thing-code" id="finalThingCode"></div>
+        </div>
+      </div>
     </section>
   </main>
 
