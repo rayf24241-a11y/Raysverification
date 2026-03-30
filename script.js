@@ -1,7 +1,6 @@
 async function verifyCode() {
   const input = document.getElementById("codeInput");
   const result = document.getElementById("result");
-
   const code = input.value.trim();
 
   if (!code) {
@@ -21,17 +20,10 @@ async function verifyCode() {
 
     const data = await response.json();
 
-    if (data.success) {
-      result.textContent = "✅ Verified successfully!";
-      result.style.color = "#ffffff";
-    } else {
-      result.textContent = "❌ Invalid code.";
-      result.style.color = "#ffb3b3";
-    }
-
+    result.textContent = data.message || "No message returned.";
+    result.style.color = data.success ? "#ffffff" : "#ffb3b3";
   } catch (error) {
-    console.error(error);
-    result.textContent = "❌ Error verifying code.";
+    result.textContent = `Error verifying code: ${error.message}`;
     result.style.color = "#ffb3b3";
   }
 }
