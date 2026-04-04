@@ -28,6 +28,7 @@ async function verifyCode() {
     });
 
     const data = await response.json();
+    console.log("verify-code response:", data);
 
     if (!data.success) {
       result.textContent = data.message || "That code is invalid.";
@@ -43,6 +44,7 @@ async function verifyCode() {
     });
 
     const linkData = await linkResponse.json();
+    console.log("create-link-code response:", linkData);
 
     if (!linkData.success || !linkData.code) {
       result.textContent = "Code worked, but link code creation failed.";
@@ -94,6 +96,7 @@ async function submitNextBotCode() {
     });
 
     const data = await response.json();
+    console.log("verify-next-bot-code response:", data);
 
     if (!data.success) {
       result.textContent = data.message || "Invalid next bot code.";
@@ -133,6 +136,7 @@ async function generateUnturnedCode() {
     });
 
     const data = await response.json();
+    console.log("create-custom-code response:", data);
 
     if (!data.success || !data.code) {
       status.textContent = "Failed to generate code.";
@@ -140,8 +144,8 @@ async function generateUnturnedCode() {
       return;
     }
 
-    output.value = data.code;
     localStorage.setItem("customAccessCode", data.code);
+    output.value = data.code;
     status.textContent = "Code ready.";
     status.classList.add("success");
   } catch (err) {
@@ -174,7 +178,7 @@ function goToVr() {
 }
 
 function goToUnturnedCode() {
-  window.location.href = "license.html";
+  window.location.href = "unturned-code.html";
 }
 
 function goHome() {
