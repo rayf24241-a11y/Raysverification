@@ -2,7 +2,7 @@ const { createClient } = require("@supabase/supabase-js");
 
 function makeLinkCode(length = 8) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let result = "GAME-";
+  let result = "LINK-";
 
   for (let i = 0; i < length; i++) {
     result += chars[Math.floor(Math.random() * chars.length)];
@@ -19,21 +19,17 @@ module.exports = async (req, res) => {
     );
 
     if (req.method !== "POST") {
-      return res.status(405).json({
-        success: false,
-        message: "Method not allowed"
-      });
+      return res.status(405).json({ success: false, message: "Method not allowed" });
     }
 
     const code = makeLinkCode();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("link_codes")
       .insert({
         code,
         used: false
-      })
-      .select();
+      });
 
     if (error) {
       return res.status(500).json({
@@ -45,8 +41,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      code,
-      saved: data
+      code
     });
   } catch (err) {
     return res.status(500).json({
