@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steam Mods</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
+    <div class="grid"></div>
+    <div class="stars"></div>
+  </div>
 
+  <main class="page">
+    <section class="card pick-card">
+      <div class="top-row center-top">
+        <div class="badge">Steam</div>
+      </div>
+
+      <h1 class="center-title">Steam Mods</h1>
+      <p class="subtext center-subtext">Pick the mod you want.</p>
+
+      <div class="mod-list">
+        <button class="pick-btn" onclick="goToUnturnedCode()">Unturned Mod</button>
+      </div>
+
+      <div class="bottom-actions center-actions">
+        <button class="how-btn" onclick="goBackToPick()">Back</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
