@@ -43,7 +43,6 @@ async function verifyCode() {
     });
 
     const linkData = await linkResponse.json();
-    console.log("create-link-code response:", linkData);
 
     if (!linkData.success || !linkData.code) {
       result.textContent = "Code worked, but link code creation failed.";
@@ -106,12 +105,49 @@ async function submitNextBotCode() {
     result.classList.add("success");
 
     setTimeout(() => {
-      window.location.href = "steam-mods.html";
+      window.location.href = "home.html";
     }, 700);
   } catch (err) {
     console.error(err);
     result.textContent = "Error checking next bot code.";
     result.classList.add("error");
+  }
+}
+
+async function generateUnturnedCode() {
+  const output = document.getElementById("licenseOutput");
+  const status = document.getElementById("licenseStatus");
+
+  if (!output || !status) return;
+
+  output.value = "";
+  status.textContent = "Generating code...";
+  status.className = "result";
+
+  try {
+    const response = await fetch("/api/create-custom-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await response.json();
+
+    if (!data.success || !data.code) {
+      status.textContent = "Failed to generate code.";
+      status.classList.add("error");
+      return;
+    }
+
+    output.value = data.code;
+    localStorage.setItem("customAccessCode", data.code);
+    status.textContent = "Code ready.";
+    status.classList.add("success");
+  } catch (err) {
+    console.error(err);
+    status.textContent = "Error generating code.";
+    status.classList.add("error");
   }
 }
 
@@ -134,15 +170,15 @@ function goToSteam() {
 }
 
 function goToVr() {
-  const status = document.getElementById("pickStatus");
-  if (status) {
-    status.textContent = "VR has nothing yet.";
-    status.className = "result error";
-  }
+  window.location.href = "vr-mods.html";
 }
 
-function goBackToPick() {
-  window.location.href = "pick-mod.html";
+function goToUnturnedCode() {
+  window.location.href = "license.html";
+}
+
+function goHome() {
+  window.location.href = "home.html";
 }
 
 document.addEventListener("keydown", (event) => {
