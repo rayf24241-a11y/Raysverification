@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Unturned Code</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
+    <div class="grid"></div>
+    <div class="stars"></div>
+  </div>
+
+  <main class="page">
+    <section class="card code-page-card">
+      <div class="top-row center-top">
+        <div class="badge">Unturned</div>
+      </div>
+
+      <h1 class="center-title">Your Custom Code</h1>
+      <p class="subtext center-subtext">
+        Copy this code and paste it into your Unturned singleplayer mod access box.
+      </p>
+
+      <div class="code-center-wrap">
+        <label for="licenseOutput" class="input-label center-label">Custom Access Code</label>
+        <input
+          id="licenseOutput"
+          class="game-code-output center-code"
+          type="text"
+          readonly
+          placeholder="Loading your code..."
+        />
+        <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy Code</button>
+        <div id="copyMsg" class="copy-msg"></div>
+        <div id="licenseStatus" class="result"></div>
+      </div>
+
+      <div class="bottom-actions center-actions">
+        <button class="how-btn" onclick="goHome()">Home</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    generateUnturnedCode();
+  </script>
+</body>
+</html>
