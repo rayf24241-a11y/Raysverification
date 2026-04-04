@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Access Key</title>
+  <title>Link Verification</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,36 +17,60 @@
   <main class="page">
     <section class="card code-page-card">
       <div class="top-row center-top">
-        <div class="badge">Access Key</div>
+        <div class="badge">Link Verification</div>
       </div>
 
-      <h1 class="center-title">Your Custom Code</h1>
+      <h1 class="center-title">Give This Code To /linkverify</h1>
       <p class="subtext center-subtext">
-        Copy this code and paste it into your singleplayer mod menu access box.
+        Copy this code, use it in Discord with <b>/linkverify</b>, then paste the next bot code below.
       </p>
 
       <div class="code-center-wrap">
-        <label for="licenseOutput" class="input-label center-label">Custom Access Code</label>
+        <label for="licenseOutput" class="input-label center-label">Link Verification Code</label>
         <input
           id="licenseOutput"
           class="game-code-output center-code"
           type="text"
           readonly
-          placeholder="Your code will appear here"
+          placeholder="Your link code will appear here"
         />
         <button class="copy-btn big-copy-btn" onclick="copyCode()">Copy Code</button>
         <div id="copyMsg" class="copy-msg"></div>
       </div>
 
-      <div class="final-note">
-        This code is for your singleplayer access flow.
+      <div class="next-step-box">
+        <h2 class="next-step-title">Paste The Next Bot Code</h2>
+        <p class="next-step-subtext">
+          After the bot gives you the next code, paste it here to unlock Steam mods.
+        </p>
+
+        <div class="input-area">
+          <label for="nextBotCodeInput" class="input-label center-label">Next Bot Code</label>
+          <div class="input-shell">
+            <input
+              id="nextBotCodeInput"
+              type="text"
+              placeholder="Paste next bot code here"
+              maxlength="60"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <button class="main-btn" onclick="submitNextBotCode()">
+          <span class="btn-text">Submit Next Bot Code</span>
+          <span class="btn-glow"></span>
+        </button>
+
+        <div id="finalResult" class="result"></div>
       </div>
     </section>
   </main>
 
   <script src="script.js"></script>
   <script>
-    const savedCode = localStorage.getItem("customAccessCode") || "";
+    const savedCode = localStorage.getItem("linkVerificationCode") || "";
     document.getElementById("licenseOutput").value = savedCode;
   </script>
 </body>
