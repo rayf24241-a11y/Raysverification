@@ -380,3 +380,39 @@ input::placeholder {
     width: 100%;
   }
 }
+.pick-card {
+  max-width: 760px;
+  text-align: center;
+}
+
+.pick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.pick-btn {
+  min-height: 90px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #ffffff, #dde2f2);
+  color: #111522;
+  font-size: 28px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 16px 36px rgba(255,255,255,0.15);
+}
+
+.pick-btn:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.mod-list {
+  margin-top: 24px;
+}
+
+.center-actions {
+  text-align: center;
+}
