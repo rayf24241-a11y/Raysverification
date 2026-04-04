@@ -1,6 +1,7 @@
 const { createClient } = require("@supabase/supabase-js");
 
-function makeCustomCode(length = 12) {
+// generate SP-XXXXX style codes
+function makeCustomCode(length = 8) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let result = "SP-";
 
@@ -13,11 +14,7 @@ function makeCustomCode(length = 12) {
 
 module.exports = async (req, res) => {
   try {
-    const supabase = createClient(
-      process.env.SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
+    // ONLY allow POST
     if (req.method !== "POST") {
       return res.status(405).json({
         success: false,
@@ -25,29 +22,40 @@ module.exports = async (req, res) => {
       });
     }
 
+    // connect to supabase
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
+    // generate code
     const code = makeCustomCode();
 
+    // save to database
     const { data, error } = await supabase
-      .from("custom_codes")
-      .insert({
-        code,
-        used: false
-      })
+      .from("custom_codes") // MAKE SURE THIS TABLE EXISTS
+      .insert([
+        {
+          code: code,
+          used: false
+        }
+      ])
       .select();
 
     if (error) {
       return res.status(500).json({
         success: false,
-        message: "Could not create custom code",
+        message: "Supabase error",
         error: error.message
       });
     }
 
     return res.status(200).json({
       success: true,
-      code,
+      code: code,
       saved: data
     });
+
   } catch (err) {
     return res.status(500).json({
       success: false,
