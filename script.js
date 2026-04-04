@@ -139,12 +139,50 @@ async function generateUnturnedCode() {
     console.log("create-custom-code response:", data);
 
     if (!data.success || !data.code) {
-      status.textContent = "Failed to generate code.";
+      status.textContent = data.message || "Failed to generate code.";
       status.classList.add("error");
       return;
     }
 
     localStorage.setItem("customAccessCode", data.code);
+    output.value = data.code;
+    status.textContent = "Code ready.";
+    status.classList.add("success");
+  } catch (err) {
+    console.error(err);
+    status.textContent = "Error generating code.";
+    status.classList.add("error");
+  }
+}
+
+async function generateCookieClickerCode() {
+  const output = document.getElementById("cookieCodeOutput");
+  const status = document.getElementById("cookieCodeStatus");
+
+  if (!output || !status) return;
+
+  output.value = "";
+  status.textContent = "Generating code...";
+  status.className = "result";
+
+  try {
+    const response = await fetch("/api/create-cookie-clicker-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await response.json();
+    console.log("create-cookie-clicker-code response:", data);
+
+    if (!data.success || !data.code) {
+      status.textContent = data.message || "Failed to generate code.";
+      status.classList.add("error");
+      return;
+    }
+
+    localStorage.setItem("cookieClickerCode", data.code);
     output.value = data.code;
     status.textContent = "Code ready.";
     status.classList.add("success");
@@ -169,6 +207,20 @@ async function copyCode() {
   }
 }
 
+async function copyCookieCode() {
+  const output = document.getElementById("cookieCodeOutput");
+  const copyMsg = document.getElementById("cookieCopyMsg");
+
+  if (!output || !copyMsg) return;
+
+  try {
+    await navigator.clipboard.writeText(output.value);
+    copyMsg.textContent = "Copied.";
+  } catch (error) {
+    copyMsg.textContent = "Could not copy.";
+  }
+}
+
 function goToSteam() {
   window.location.href = "steam-mods.html";
 }
@@ -179,6 +231,10 @@ function goToVr() {
 
 function goToUnturnedCode() {
   window.location.href = "unturned-code.html";
+}
+
+function goToCookieClickerCode() {
+  window.location.href = "cookie-clicker-code.html";
 }
 
 function goHome() {
